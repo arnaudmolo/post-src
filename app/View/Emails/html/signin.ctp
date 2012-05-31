@@ -1,0 +1,1 @@
+<h1>Salut, c'est un bon mail</h1>
