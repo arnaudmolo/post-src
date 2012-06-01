@@ -42,6 +42,10 @@ class User extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			'isUnique' => array(
+				'rule'=>array('isUnique'),
+				'message' => 'Cette adresse e-mail est déjà utilisée.',
+			),
 		),
 		'first_name' => array(
 			'alphanumeric' => array(

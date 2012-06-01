@@ -17,16 +17,17 @@ $cakeDescription = __d('Post-src', "Post-SRC, le réseau social des anciens de l
 		echo $this->fetch('meta');
 		/*echo $this->fetch('css');*/
 		echo $this->fetch('script');
+		echo $this->Html->css('cake.generic');
 	?>
 	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet/less" href="http://127.0.0.1/post-src/app/webroot/less/style.less">
-	<script src="http://127.0.0.1/post-src/app/webroot/js/libs/less-1.3.0.min.js"></script>
 	<script src="http://127.0.0.1/post-src/app/webroot/js/jquery.js"></script>
 	<script src="http://127.0.0.1/post-src/app/webroot/js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
 </head>
+<!--
 <div id="arriere2">
     <img src="img/background.jpg" class="arriere" alt="fond">
 </div>
+-->
 <body>
 	<header class="row">
 		<div class="container">

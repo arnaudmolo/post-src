@@ -7,6 +7,17 @@ App::uses('AppController', 'Controller');
  */
 class AnnoncesController extends AppController {
 
+public function isAuthorized($user){
+	debug($user);
+	
+	if(in_array($this->action, array('edit', 'delete'))) {
+        $postId = $this->request->params['pass'][0];
+        if ($this->Post->isOwnedBy($postId, $user['id'])) {
+            return true;
+        }
+    }
+    return parent::isAuthorized($user);
+}
 
 /**
  * index method
@@ -56,8 +67,9 @@ class AnnoncesController extends AppController {
  *
  * @param string $id
  * @return void
- */
+ *//*
 	public function edit($id = null) {
+		if(isAuthorized()){}
 		$this->Annonce->id = $id;
 		if (!$this->Annonce->exists()) {
 			throw new NotFoundException(__('Invalid annonce'));
@@ -74,8 +86,9 @@ class AnnoncesController extends AppController {
 		}
 		$users = $this->Annonce->User->find('list');
 		$this->set(compact('users'));
+		debug($this->Annonce->data['User']['id']);
 	}
-
+*/
 /**
  * delete method
  *
@@ -147,8 +160,9 @@ class AnnoncesController extends AppController {
  * @return void
  */
 	public function admin_edit($id = null) {
+		/*debug($this->isAuthorized());*/
 		$this->Annonce->id = $id;
-		if (!$this->Annonce->exists()) {
+		if (!$this->Annonce->exists()){
 			throw new NotFoundException(__('Invalid annonce'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
@@ -160,6 +174,7 @@ class AnnoncesController extends AppController {
 			}
 		} else {
 			$this->request->data = $this->Annonce->read(null, $id);
+			debug($this->Annonce->data);
 		}
 		$users = $this->Annonce->User->find('list');
 		$this->set(compact('users'));

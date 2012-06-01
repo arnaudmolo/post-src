@@ -6,8 +6,7 @@ App::uses('AppController', 'Controller');
  * @property User $User
  */
 class UsersController extends AppController {
-public function beforeFilter()
-{
+public function beforeFilter(){
 	parent::beforeFilter();
 	$this->Auth->allow('signin','logout','index','login');
 }
@@ -45,8 +44,6 @@ public function beforeFilter()
 	public function logout(){
 		$this->redirect($this->Auth->logout());
 	}
-
-
 /**
  * view method
  *
@@ -66,6 +63,9 @@ public function beforeFilter()
  * @return void
  */
 	public function signin(){
+		if($this->Auth->login()){
+			$this->redirect(array('action'=>'index'));
+		}
 		if ($this->request->is('post')) {
 			$d = $this->request->data;
 			$d['User']['id']=null;
