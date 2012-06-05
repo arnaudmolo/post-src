@@ -58,6 +58,8 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Formation'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('List Formations Users'), array('controller' => 'formations_users', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Formations Users'), array('controller' => 'formations_users', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Metiers'), array('controller' => 'metiers', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Metier'), array('controller' => 'metiers', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>

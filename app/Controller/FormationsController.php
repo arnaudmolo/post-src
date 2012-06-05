@@ -38,11 +38,12 @@ class FormationsController extends AppController {
  * @return void
  */
 	public function add() {
+		debug($this->Formation->FormationsUsers);
 		if ($this->request->is('post')) {
+			/*debug($this->request->data);*/
 			$this->Formation->create();
 			if ($this->Formation->save($this->request->data)) {
 				$this->Session->setFlash(__('The formation has been saved'));
-				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The formation could not be saved. Please, try again.'));
 			}

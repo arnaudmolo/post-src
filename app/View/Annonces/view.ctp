@@ -36,11 +36,6 @@
 			<?php echo h($annonce['Annonce']['url_entreprise']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Contenu'); ?></dt>
-		<dd>
-			<?php echo h($annonce['Annonce']['contenu']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('User'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($annonce['User']['id'], array('controller' => 'users', 'action' => 'view', $annonce['User']['id'])); ?>

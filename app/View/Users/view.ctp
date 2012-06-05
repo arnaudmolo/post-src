@@ -56,6 +56,11 @@
 			<?php echo h($user['User']['last_connexion']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Role'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['role']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Active'); ?></dt>
 		<dd>
 			<?php echo h($user['User']['active']); ?>
@@ -104,6 +109,8 @@
 		<li><?php echo $this->Html->link(__('New Annonce'), array('controller' => 'annonces', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Emplois'), array('controller' => 'emplois', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Emplois'), array('controller' => 'emplois', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Posts'), array('controller' => 'posts', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Post'), array('controller' => 'posts', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Formations'), array('controller' => 'formations', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Formation'), array('controller' => 'formations', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Metiers'), array('controller' => 'metiers', 'action' => 'index')); ?> </li>
@@ -197,6 +204,49 @@
 	</div>
 </div>
 <div class="related">
+	<h3><?php echo __('Related Posts');?></h3>
+	<?php if (!empty($user['Post'])):?>
+	<table cellpadding = "0" cellspacing = "0">
+	<tr>
+		<th><?php echo __('Id'); ?></th>
+		<th><?php echo __('Title'); ?></th>
+		<th><?php echo __('Slug'); ?></th>
+		<th><?php echo __('Content'); ?></th>
+		<th><?php echo __('Type'); ?></th>
+		<th><?php echo __('Date'); ?></th>
+		<th><?php echo __('Online'); ?></th>
+		<th><?php echo __('User Id'); ?></th>
+		<th class="actions"><?php echo __('Actions');?></th>
+	</tr>
+	<?php
+		$i = 0;
+		foreach ($user['Post'] as $post): ?>
+		<tr>
+			<td><?php echo $post['id'];?></td>
+			<td><?php echo $post['title'];?></td>
+			<td><?php echo $post['slug'];?></td>
+			<td><?php echo $post['content'];?></td>
+			<td><?php echo $post['type'];?></td>
+			<td><?php echo $post['date'];?></td>
+			<td><?php echo $post['online'];?></td>
+			<td><?php echo $post['user_id'];?></td>
+			<td class="actions">
+				<?php echo $this->Html->link(__('View'), array('controller' => 'posts', 'action' => 'view', $post['id'])); ?>
+				<?php echo $this->Html->link(__('Edit'), array('controller' => 'posts', 'action' => 'edit', $post['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'posts', 'action' => 'delete', $post['id']), null, __('Are you sure you want to delete # %s?', $post['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	</table>
+<?php endif; ?>
+
+	<div class="actions">
+		<ul>
+			<li><?php echo $this->Html->link(__('New Post'), array('controller' => 'posts', 'action' => 'add'));?> </li>
+		</ul>
+	</div>
+</div>
+<div class="related">
 	<h3><?php echo __('Related Formations');?></h3>
 	<?php if (!empty($user['Formation'])):?>
 	<table cellpadding = "0" cellspacing = "0">
@@ -254,10 +304,10 @@
 	<tr>
 		<th><?php echo __('Id'); ?></th>
 		<th><?php echo __('Contenu'); ?></th>
-		<th><?php echo __('Date'); ?></th>
 		<th><?php echo __('Creation'); ?></th>
 		<th><?php echo __('Communication'); ?></th>
 		<th><?php echo __('Developpement'); ?></th>
+		<th><?php echo __('Title'); ?></th>
 		<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 	<?php
@@ -266,10 +316,10 @@
 		<tr>
 			<td><?php echo $metier['id'];?></td>
 			<td><?php echo $metier['contenu'];?></td>
-			<td><?php echo $metier['date'];?></td>
 			<td><?php echo $metier['creation'];?></td>
 			<td><?php echo $metier['communication'];?></td>
 			<td><?php echo $metier['developpement'];?></td>
+			<td><?php echo $metier['title'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'metiers', 'action' => 'view', $metier['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'metiers', 'action' => 'edit', $metier['id'])); ?>

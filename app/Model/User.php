@@ -5,16 +5,12 @@ App::uses('AppModel', 'Model');
  *
  * @property Annonce $Annonce
  * @property Emplois $Emplois
+ * @property Post $Post
  * @property Formation $Formation
  * @property Metier $Metier
  */
 class User extends AppModel {
-/**
- * Validation rules
- *
- * @var array
- */
-	public $validate = array(
+public $validate = array(
 		'id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -245,7 +241,17 @@ class User extends AppModel {
 			),
 		),
 	);
-
+/**
+	* beforeSave methode
+	* Pour applicquer des modifications avant l'enregistrement d'un objet
+	* @return boolean
+	**/
+	public function beforeSave(){
+		if(isset($this->data[$this->alias]['password'])){
+			$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+		}
+		return true;
+	}
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
@@ -269,6 +275,19 @@ class User extends AppModel {
 		),
 		'Emplois' => array(
 			'className' => 'Emplois',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Post' => array(
+			'className' => 'Post',
 			'foreignKey' => 'user_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -320,15 +339,5 @@ class User extends AppModel {
 			'insertQuery' => ''
 		)
 	);
-	/**
-	* beforeSave methode
-	* Pour applicquer des modifications avant l'enregistrement d'un objet
-	* @return boolean
-	**/
-	public function beforeSave(){
-		if(isset($this->data[$this->alias]['password'])){
-			$this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
-		}
-		return true;
-	}
+
 }

@@ -16,6 +16,7 @@
 		echo $this->Form->input('public');
 		echo $this->Form->input('Metier');
 		echo $this->Form->input('User');
+		echo $this->Form->input('FormationsUser.avi');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

@@ -8,11 +8,15 @@ App::uses('AppController', 'Controller');
 class AnnoncesController extends AppController {
 
 public function isAuthorized($user){
-	debug($user);
-	
+	if($this->action === 'add'){
+		if(isset($user['annee_sortie'])&&(((int)substr($user['annee_sortie'], 0,4)-1)>=(int)date('Y'))){ // Seul les anciens peuvent lancer des annonces
+			return true;
+		}
+	}
+
 	if(in_array($this->action, array('edit', 'delete'))) {
         $postId = $this->request->params['pass'][0];
-        if ($this->Post->isOwnedBy($postId, $user['id'])) {
+        if ($this->Annonce->isOwnedBy($postId, $user['id'])) {
             return true;
         }
     }
@@ -24,7 +28,7 @@ public function isAuthorized($user){
  *
  * @return void
  */
-	public function index() {
+	public function index(){
 		$this->Annonce->recursive = 0;
 		$this->set('annonces', $this->paginate());
 	}
@@ -67,9 +71,8 @@ public function isAuthorized($user){
  *
  * @param string $id
  * @return void
- *//*
+ */
 	public function edit($id = null) {
-		if(isAuthorized()){}
 		$this->Annonce->id = $id;
 		if (!$this->Annonce->exists()) {
 			throw new NotFoundException(__('Invalid annonce'));
@@ -86,9 +89,8 @@ public function isAuthorized($user){
 		}
 		$users = $this->Annonce->User->find('list');
 		$this->set(compact('users'));
-		debug($this->Annonce->data['User']['id']);
 	}
-*/
+
 /**
  * delete method
  *

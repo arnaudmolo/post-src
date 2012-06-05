@@ -1,4 +1,4 @@
-<?php
+<?php debug($this->viewPath);?><?php
 $cakeDescription = __d('Post-src', "Post-SRC, le réseau social des anciens de l'IUT SRC de laval");
 ?>
 <!DOCTYPE html>
@@ -13,14 +13,13 @@ $cakeDescription = __d('Post-src', "Post-SRC, le réseau social des anciens de l
 		echo $this->Html->meta('icon');
 
 		/*echo $this->Html->css('cake.generic');*/
-
+		echo $this->Html->script('jquery.js');
 		echo $this->fetch('meta');
-		/*echo $this->fetch('css');*/
-		echo $this->fetch('script');
+		echo $this->fetch('css');
 		echo $this->Html->css('cake.generic');
+		echo $this->Html->css('mixins');
 	?>
 	<meta name="viewport" content="width=device-width">
-	<script src="http://127.0.0.1/post-src/app/webroot/js/jquery.js"></script>
 	<script src="http://127.0.0.1/post-src/app/webroot/js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
 </head>
 <!--
@@ -29,11 +28,12 @@ $cakeDescription = __d('Post-src', "Post-SRC, le réseau social des anciens de l
 </div>
 -->
 <body>
+	<div id="fb-root"></div>
 	<header class="row">
 		<div class="container">
 			<div class="row">
 				<center>
-					<a href="/"> <img src="img/header.png" alt="" /></a>
+					<a href="/"> <?php echo $this->Html->image('header.png', array('alt'=>''))?></a>
 				</center>
 				<div class="menu horizontal offset8 span4">
 					<ul>
@@ -42,6 +42,9 @@ $cakeDescription = __d('Post-src', "Post-SRC, le réseau social des anciens de l
 						</li>
 						<li>
 							<a href="deconnexion.php" title="deconnexion">Déconnexion</a>
+						</li>
+						<li>
+							<a href="<?php echo $this->Html->url(array('action' => 'facebook')); ?>" class="facebookConnect" >Se connecter avec Facebook</a>
 						</li>
 					</ul>
 				</div>
@@ -73,5 +76,6 @@ $cakeDescription = __d('Post-src', "Post-SRC, le réseau social des anciens de l
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
 	<?php echo $scripts_for_layout; ?>
+    <?php echo $this->Html->script('facebook'); ?>
 </body>
 </html>

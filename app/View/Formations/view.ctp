@@ -70,11 +70,54 @@
 		<li><?php echo $this->Form->postLink(__('Delete Formation'), array('action' => 'delete', $formation['Formation']['id']), null, __('Are you sure you want to delete # %s?', $formation['Formation']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Formations'), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Formation'), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Formations Users'), array('controller' => 'formations_users', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Formations Users'), array('controller' => 'formations_users', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Metiers'), array('controller' => 'metiers', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Metier'), array('controller' => 'metiers', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 	</ul>
+</div>
+<div class="related">
+	<h3><?php echo __('Related Formations Users');?></h3>
+	<?php if (!empty($formation['FormationsUsers'])):?>
+	<table cellpadding = "0" cellspacing = "0">
+	<tr>
+		<th><?php echo __('Id'); ?></th>
+		<th><?php echo __('Formation Id'); ?></th>
+		<th><?php echo __('User Id'); ?></th>
+		<th><?php echo __('Titre'); ?></th>
+		<th><?php echo __('Avi'); ?></th>
+		<th><?php echo __('Date'); ?></th>
+		<th><?php echo __('Obtention'); ?></th>
+		<th class="actions"><?php echo __('Actions');?></th>
+	</tr>
+	<?php
+		$i = 0;
+		foreach ($formation['FormationsUsers'] as $formationsUsers): ?>
+		<tr>
+			<td><?php echo $formationsUsers['id'];?></td>
+			<td><?php echo $formationsUsers['formation_id'];?></td>
+			<td><?php echo $formationsUsers['user_id'];?></td>
+			<td><?php echo $formationsUsers['titre'];?></td>
+			<td><?php echo $formationsUsers['avi'];?></td>
+			<td><?php echo $formationsUsers['date'];?></td>
+			<td><?php echo $formationsUsers['obtention'];?></td>
+			<td class="actions">
+				<?php echo $this->Html->link(__('View'), array('controller' => 'formations_users', 'action' => 'view', $formationsUsers['id'])); ?>
+				<?php echo $this->Html->link(__('Edit'), array('controller' => 'formations_users', 'action' => 'edit', $formationsUsers['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'formations_users', 'action' => 'delete', $formationsUsers['id']), null, __('Are you sure you want to delete # %s?', $formationsUsers['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	</table>
+<?php endif; ?>
+
+	<div class="actions">
+		<ul>
+			<li><?php echo $this->Html->link(__('New Formations Users'), array('controller' => 'formations_users', 'action' => 'add'));?> </li>
+		</ul>
+	</div>
 </div>
 <div class="related">
 	<h3><?php echo __('Related Metiers');?></h3>
@@ -83,10 +126,10 @@
 	<tr>
 		<th><?php echo __('Id'); ?></th>
 		<th><?php echo __('Contenu'); ?></th>
-		<th><?php echo __('Date'); ?></th>
 		<th><?php echo __('Creation'); ?></th>
 		<th><?php echo __('Communication'); ?></th>
 		<th><?php echo __('Developpement'); ?></th>
+		<th><?php echo __('Title'); ?></th>
 		<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 	<?php
@@ -95,10 +138,10 @@
 		<tr>
 			<td><?php echo $metier['id'];?></td>
 			<td><?php echo $metier['contenu'];?></td>
-			<td><?php echo $metier['date'];?></td>
 			<td><?php echo $metier['creation'];?></td>
 			<td><?php echo $metier['communication'];?></td>
 			<td><?php echo $metier['developpement'];?></td>
+			<td><?php echo $metier['title'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'metiers', 'action' => 'view', $metier['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'metiers', 'action' => 'edit', $metier['id'])); ?>
@@ -131,6 +174,7 @@
 		<th><?php echo __('Annee Sortie'); ?></th>
 		<th><?php echo __('Date Inscription'); ?></th>
 		<th><?php echo __('Last Connexion'); ?></th>
+		<th><?php echo __('Role'); ?></th>
 		<th><?php echo __('Active'); ?></th>
 		<th><?php echo __('Facebook'); ?></th>
 		<th><?php echo __('Twitter'); ?></th>
@@ -155,6 +199,7 @@
 			<td><?php echo $user['annee_sortie'];?></td>
 			<td><?php echo $user['date_inscription'];?></td>
 			<td><?php echo $user['last_connexion'];?></td>
+			<td><?php echo $user['role'];?></td>
 			<td><?php echo $user['active'];?></td>
 			<td><?php echo $user['facebook'];?></td>
 			<td><?php echo $user['twitter'];?></td>

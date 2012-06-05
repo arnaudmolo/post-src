@@ -13,6 +13,7 @@
 		echo $this->Form->input('annee_sortie');
 		echo $this->Form->input('date_inscription');
 		echo $this->Form->input('last_connexion');
+		echo $this->Form->input('role');
 		echo $this->Form->input('active');
 		echo $this->Form->input('facebook');
 		echo $this->Form->input('twitter');
@@ -35,6 +36,8 @@
 		<li><?php echo $this->Html->link(__('New Annonce'), array('controller' => 'annonces', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Emplois'), array('controller' => 'emplois', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Emplois'), array('controller' => 'emplois', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Posts'), array('controller' => 'posts', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Post'), array('controller' => 'posts', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Formations'), array('controller' => 'formations', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Formation'), array('controller' => 'formations', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Metiers'), array('controller' => 'metiers', 'action' => 'index')); ?> </li>

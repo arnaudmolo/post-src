@@ -33,18 +33,26 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 	public $components = array(
-		'Session', 'Auth' => array(
-			'loginRedirect' => array('controller'=>'users', 'action'=>'index'),
-			'logoutRedirect' => array('controller'=>'pages', 'action'=>'display', 'home')
-			)
-		);
-	public function beforeFilter(){
-		$this->Auth->allow('index', 'view');
+		'Session','Auth' => array(
+			'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
+			'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
+			'authorize' => array('Controller')
+        )
+    );
+
+	public $helpers = array('Text','Form','Html','Session','Cache','Taxonomy.Taxonomy');
+
+	public function isAuthorized($user){
+		if(isset($user['role'])&&$user['role']==='admin'){
+			return true;
+		}
+		return false;
 	}
-	public function isAuthorized($user) {
-	    if (isset($user['role']) && $user['role'] === 'admin') {
-	        return true;
-	    }
-	    return false;
+
+	public function beforeFilter() {
+		$this->Auth->allow('index', 'view', 'display', 'facebook');
+	}
+	public function afetFilter(){
+		$this->Session->data->User = $this->Auth->user();
 	}
 }

@@ -168,5 +168,24 @@ class Formation extends AppModel {
 			'insertQuery' => ''
 		)
 	);
-
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
+		'FormationsUsers' => array(
+			'className' => 'FormationsUsers',
+			'foreignKey' => 'formation_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
 }

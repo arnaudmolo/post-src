@@ -10,7 +10,6 @@ public function beforeFilter(){
 	parent::beforeFilter();
 	$this->Auth->allow('signin','logout','index','login');
 }
-
 /**
  * index method
  *
@@ -21,12 +20,35 @@ public function beforeFilter(){
 		$this->set('users', $this->paginate());
 	}
 
+	public function facebook(){
+		require APPLIBS.'Facebook'.DS.'facebook.php';
+		$facebook = new Facebook(array(
+			'appId' => '138320212970487',
+			'secret' => 'b6cceedfd1905ab4244fdc2922257853'
+			));
+		$user = $facebook->getUser();
+		if($user)
+		{
+			try {
+				$infos = $facebook->api('/me');
+				debug($infos);
+			} catch (FacebookApiException $e) {
+				debug($e);
+			}
+		}else{
+			$this->redirect(array('action' => 'login' ));
+		die('heofh');
+	}
+
 /**
 * login method
 * 
 * @return void
 **/
 	public function login(){
+		if($this->Auth->login()){
+			$this->redirect(array('action'=>'index'));
+		}
 		if($this->request->is('post')){
 			if($this->Auth->login()){
 				$this->redirect($this->Auth->redirect());
